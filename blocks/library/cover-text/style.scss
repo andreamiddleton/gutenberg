@@ -1,5 +1,8 @@
 .wp-block-cover-text {
-	padding: 20px 30px;
+
+	&.has-background {
+		padding: 20px 30px;
+	}
 
 	p {
 		font-size: inherit !important;

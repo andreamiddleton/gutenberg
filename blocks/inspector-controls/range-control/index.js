@@ -29,6 +29,7 @@ function RangeControl( { label, value, instanceId, onChange, beforeIcon, afterIc
 				type="number"
 				onChange={ onChangeValue }
 				value={ value }
+				{ ...props }
 			/>
 		</BaseControl>
 	);

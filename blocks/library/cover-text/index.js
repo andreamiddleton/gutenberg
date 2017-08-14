@@ -62,7 +62,6 @@ registerBlockType( 'core/cover-text', {
 		},
 		fontSize: {
 			type: 'number',
-			default: 16,
 		},
 	},
 
@@ -142,6 +141,7 @@ registerBlockType( 'core/cover-text', {
 				key="block"
 				className={ classnames( className, {
 					[ `align${ width }` ]: width,
+					'has-background': backgroundColor,
 				} ) }
 				style={ {
 					backgroundColor: backgroundColor,
@@ -171,17 +171,21 @@ registerBlockType( 'core/cover-text', {
 	save( { attributes } ) {
 		const { width, align, content, dropCap, backgroundColor, textColor, fontSize } = attributes;
 		const className = dropCap ? 'has-drop-cap' : null;
-		const wrapperClassName = width ? `align${ width }` : null;
+		const wrapperClassName = classnames( className, {
+			[ `align${ width }` ]: width,
+			'has-background': backgroundColor,
+		} );
+		const styles = {
+			backgroundColor: backgroundColor,
+			color: textColor,
+			fontSize: fontSize,
+		};
 
 		if ( ! align ) {
 			return (
 				<div
 					className={ wrapperClassName }
-					style={ {
-						backgroundColor: backgroundColor,
-						color: textColor,
-						fontSize: fontSize,
-					} }
+					style={ styles }
 				>
 					<p className={ className }>{ content }</p>
 				</div>
@@ -191,11 +195,7 @@ registerBlockType( 'core/cover-text', {
 		return (
 			<div
 				className={ wrapperClassName }
-				style={ {
-					backgroundColor: backgroundColor,
-					color: textColor,
-					fontSize: fontSize,
-				} }
+				style={ styles }
 			>
 				<p style={ { textAlign: align } } className={ className }>{ content }</p>
 			</div>
